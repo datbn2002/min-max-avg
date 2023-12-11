@@ -1,0 +1,73 @@
+import tkinter as tk
+from tkinter import messagebox
+
+def tinh_toan_day_so(day_so):
+    try:
+        # Chuyển đổi chuỗi đầu vào thành một danh sách các số nguyên
+        danh_sach_so = [int(so.strip()) for so in day_so.split(',')]
+        # Tìm số nhỏ nhất
+        so_nho_nhat = min(danh_sach_so)
+        # Tìm số lớn nhất
+        so_lon_nhat = max(danh_sach_so)
+        # Tính trung bình cộng
+        trung_binh_cong = sum(danh_sach_so) / len(danh_sach_so)
+        # Hiển thị kết quả
+        messagebox.showinfo("Kết quả", f"Số nhỏ nhất: {so_nho_nhat}\nSố lớn nhất: {so_lon_nhat}\nTrung bình cộng: {trung_binh_cong}")
+    except ValueError:
+        messagebox.showerror("Lỗi", "Vui lòng nhập dãy số nguyên hợp lệ.")
+
+def on_min_button_click(entry):
+    day_so_input = entry.get()
+    try:
+        danh_sach_so = [int(so.strip()) for so in day_so_input.split(',')]
+        so_nho_nhat = min(danh_sach_so)
+        messagebox.showinfo("Kết quả", f"Số nhỏ nhất: {so_nho_nhat}")
+    except ValueError:
+        messagebox.showerror("Lỗi", "Vui lòng nhập dãy số nguyên hợp lệ.")
+
+def on_max_button_click(entry):
+    day_so_input = entry.get()
+    try:
+        danh_sach_so = [int(so.strip()) for so in day_so_input.split(',')]
+        so_lon_nhat = max(danh_sach_so)
+        messagebox.showinfo("Kết quả", f"Số lớn nhất: {so_lon_nhat}")
+    except ValueError:
+        messagebox.showerror("Lỗi", "Vui lòng nhập dãy số nguyên hợp lệ.")
+
+def on_avg_button_click(entry):
+    day_so_input = entry.get()
+    try:
+        danh_sach_so = [int(so.strip()) for so in day_so_input.split(',')]
+        trung_binh_cong = sum(danh_sach_so) / len(danh_sach_so)
+        messagebox.showinfo("Kết quả", f"Trung bình cộng: {trung_binh_cong}")
+    except ValueError:
+        messagebox.showerror("Lỗi", "Vui lòng nhập dãy số nguyên hợp lệ.")
+
+def tinh_toan_tu_giao_dien():
+    # Tạo cửa sổ GUI
+    root = tk.Tk()
+    root.title("Tính toán dãy số")
+
+    # Tạo và hiển thị label
+    label = tk.Label(root, text="Nhập dãy số nguyên, cách nhau bởi dấu phẩy:")
+    label.pack()
+
+    # Tạo và hiển thị ô nhập liệu
+    entry = tk.Entry(root, width=40)
+    entry.pack()
+
+    # Tạo các nút tính toán riêng lẻ
+    min_button = tk.Button(root, text="Số nhỏ nhất", command=lambda: on_min_button_click(entry))
+    min_button.pack()
+
+    max_button = tk.Button(root, text="Số lớn nhất", command=lambda: on_max_button_click(entry))
+    max_button.pack()
+
+    avg_button = tk.Button(root, text="Trung bình cộng", command=lambda: on_avg_button_click(entry))
+    avg_button.pack()
+
+    # Chạy vòng lặp chính của GUI
+    root.mainloop()
+
+# Gọi hàm để mở cửa sổ GUI và chờ người dùng nhập liệu
+tinh_toan_tu_giao_dien()
